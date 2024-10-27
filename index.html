@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +16,15 @@
         }
         .container {
             text-align: center;
+            position: relative;
+        }
+        #score {
+            font-size: 1.5em;
+            background-color: white;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            margin-bottom: 20px;
         }
         #board {
             display: grid;
@@ -51,19 +59,21 @@
 </head>
 <body>
     <div class="container">
-        <h1>Տիկ-Տակ-Տոե</h1>
+        <div id="score">X: 0 | O: 0</div>
         <div id="board"></div>
-        <button id="reset">Խաղալ Նորից</button>
+        <button id="reset">Restart Game</button>
         <div id="message"></div>
     </div>
     <script>
         const boardElement = document.getElementById('board');
         const resetButton = document.getElementById('reset');
         const messageElement = document.getElementById('message');
+        const scoreElement = document.getElementById('score');
 
         let board = ['', '', '', '', '', '', '', '', ''];
         let currentPlayer = 'X';
         let gameActive = true;
+        let score = { X: 0, O: 0 };
 
         const winningConditions = [
             [0, 1, 2],
@@ -119,6 +129,8 @@
             }
             if (roundWon) {
                 messageElement.innerText = `${currentPlayer} Հաղթեց!`;
+                score[currentPlayer]++;
+                updateScore();
                 gameActive = false;
                 return;
             }
@@ -126,6 +138,10 @@
                 messageElement.innerText = "Ոչ-ոքի!";
                 gameActive = false;
             }
+        }
+
+        function updateScore() {
+            scoreElement.innerText = `X: ${score.X} | O: ${score.O}`;
         }
 
         resetButton.addEventListener('click', () => {
