@@ -118,12 +118,12 @@
                 }
             }
             if (roundWon) {
-                messageElement.innerText = `${currentPlayer} Հաղթեցին!`;
+                messageElement.innerText = `${currentPlayer} Հաղթեց!`;
                 gameActive = false;
                 return;
             }
             if (!board.includes('')) {
-                messageElement.innerText = "It's a Draw!";
+                messageElement.innerText = "Ոչ-ոքի!";
                 gameActive = false;
             }
         }
